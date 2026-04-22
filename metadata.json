@@ -1,0 +1,12 @@
+{
+  "name": "Konkan Stay - Maharashtra Beach Homestays",
+  "description": "A premium travel app for discovering and booking authentic homestays along the Maharashtra coastline. Features include advanced search, map integration, and secure booking.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "Firebase Authentication",
+    "Cloud Firestore",
+    "Gemini AI Recommendations"
+  ]
+}

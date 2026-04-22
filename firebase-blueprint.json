@@ -1,0 +1,91 @@
+{
+  "entities": {
+    "Homestay": {
+      "title": "Homestay",
+      "description": "A beach homestay property",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "location": { "type": "string" },
+        "beach": { "type": "string" },
+        "pricePerNight": { "type": "number" },
+        "rating": { "type": "number" },
+        "reviewsCount": { "type": "number" },
+        "images": { "type": "array", "items": { "type": "string" } },
+        "description": { "type": "string" },
+        "amenities": { "type": "array", "items": { "type": "string" } },
+        "attractionsNearby": { "type": "array", "items": { "type": "string" } },
+        "coordinates": {
+          "type": "object",
+          "properties": {
+            "lat": { "type": "number" },
+            "lng": { "type": "number" }
+          }
+        }
+      },
+      "required": ["name", "location", "pricePerNight", "beach"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "A user review for a homestay",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "homestayId": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "rating", "comment"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "A homestay booking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "homestayId": { "type": "string" },
+        "userId": { "type": "string" },
+        "startDate": { "type": "string", "format": "date" },
+        "endDate": { "type": "string", "format": "date" },
+        "totalPrice": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled"] }
+      },
+      "required": ["homestayId", "userId", "startDate", "endDate", "totalPrice"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile and preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "wishlist": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["uid", "email"]
+    }
+  },
+  "firestore": {
+    "/homestays/{homestayId}": {
+      "schema": "Homestay",
+      "description": "Global collection of homestays"
+    },
+    "/homestays/{homestayId}/reviews/{reviewId}": {
+      "schema": "Review",
+      "description": "Reviews for a specific homestay"
+    },
+    "/bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "User bookings"
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Public and private user profile data"
+    }
+  }
+}
